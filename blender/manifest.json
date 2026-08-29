@@ -12,7 +12,7 @@
         "BLENDER_PROJECT_DIR" : "/workspace/blender"
     },
 	"extensions": {
-		"GRID": {
+		"STACK": {
 			"containers": {
 				"%env.OPENSIM_BLENDER_IMAGE%": {
 					"name": "%env.COMPOSE_PROJECT_NAME%-blender",
