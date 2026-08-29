@@ -1,0 +1,28 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "permission": {
+    "write": {
+      "/workspace/blender": "allow",
+      "/workspace/blender/**": "allow"
+    },
+    "edit": {
+      "/workspace/blender": "allow",
+      "/workspace/blender/**": "allow"
+    },
+    "bash": {
+      "python *": "allow"
+    },
+    "external_directory": {
+      "/workspace/blender/**": "allow",
+      "/workspaceblender/": "allow",
+      "*": "deny"
+    }
+  },
+  "mcp": {
+    "blender_mcp": {
+      "type": "remote",
+      "url": "http://%env.COMPOSE_PROJECT_NAME%-blender:%env.BLENDER_MCP_PORT%/mcp",
+      "enabled": true
+    }
+  }
+}

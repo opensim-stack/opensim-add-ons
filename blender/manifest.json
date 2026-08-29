@@ -1,0 +1,54 @@
+{
+	"name": "blender",
+	"description": "This add-on provides a Blender instance with MCP tools enabled, allowing your Bots access to a 3D pipeline.",
+	"icon" : "blender.svg",
+	"version": "0.0.1",
+	"constants": {
+	    "OPENSIM_BLENDER_IMAGE": "bithatch/opensim-blender:latest",
+	    "BLENDER_MCP_HOST": "0.0.0.0",
+        "BLENDER_MCP_PORT": "8996",
+        "BLENDER_TCP_PROTOCOL_HOST" : "127.0.0.1",
+        "BLENDER_TCP_PROTOCOL_PORT" : "9876",
+        "BLENDER_PROJECT_DIR" : "/workspace/blender"
+    },
+	"extensions": {
+		"GRID": {
+			"containers": {
+				"%env.OPENSIM_BLENDER_IMAGE%": {
+					"name": "%env.COMPOSE_PROJECT_NAME%-blender",
+					"environment": {
+                        "BLENDER_MCP_HOST": "%env.BLENDER_MCP_HOST%",
+                        "BLENDER_MCP_PORT": "%env.BLENDER_MCP_PORT%",
+                        "BLENDER_TCP_PROTOCOL_HOST": "%env.BLENDER_TCP_PROTOCOL_HOST%",
+                        "BLENDER_TCP_PROTOCOL_PORT": "%env.BLENDER_TCP_PROTOCOL_PORT%",
+                        "BLENDER_PROJECT_DIR": "%env.BLENDER_PROJECT_DIR%",
+                        "BLENDER_EXTRA_ARGS": "%env.BLENDER_EXTRA_ARGS%"
+					},
+					"volumes": {
+						"%env.COMPOSE_PROJECT_NAME%_opensim-workspace": "/workspace",
+						"%env.COMPOSE_PROJECT_NAME%_blender-config": "/root/.config/blender",
+						"%env.COMPOSE_PROJECT_NAME%_blender-cache": "/root/.cache/opencode",
+                        "%env.COMPOSE_PROJECT_NAME%_blender-data": "/root/.local/share/blender"
+					},
+					"directories": {
+                        "/workspace/blender": "%env.BLENDER_PROJECT_DIR%"
+                    },
+                    "managed": [
+                        {
+                        "resource": "governor-opencode.json",
+                        "dropIns": "/config/add-ons/opencode/opencode.json.d"
+                        },
+                        {
+                        "resource": "builder-opencode.json",
+                        "dropIns": "/config/add-ons/opencode/opencode.json.d"
+                        },
+                        {
+                        "resource": "builder-opencode.json",
+                        "dropIns": "/config/add-ons/opencode/opencode.json.d"
+                        }
+                    ]
+				}
+			}
+		}
+	}
+}
