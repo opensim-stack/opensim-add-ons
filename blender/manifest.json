@@ -43,7 +43,7 @@
                         "dropIns": "/config/add-ons/opencode/opencode.json.d"
                         },
                         {
-                        "resource": "builder-opencode.json",
+                        "resource": "actor-opencode.json",
                         "dropIns": "/config/add-ons/opencode/opencode.json.d"
                         }
                     ]
