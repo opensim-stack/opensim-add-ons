@@ -67,7 +67,7 @@ Our example manifest below for Blender uses OpenSim AI Stack's own Blender build
                 /* The image reference */
                 "%env.OPENSIM_BLENDER_IMAGE%": {
                     /* Container name */
-                    "name": "%env.COMPOSE_PROJECT_NAME%-blender",
+                    "name": "%cfg.COMPOSE_PROJECT_NAME%-blender",
                     /* Environment */
                     "environment": {
                         "BLENDER_MCP_HOST": "%env.BLENDER_MCP_HOST%",
@@ -79,15 +79,15 @@ Our example manifest below for Blender uses OpenSim AI Stack's own Blender build
                     },
                     /* Volumes */
                     "volumes": {
-                        "%env.COMPOSE_PROJECT_NAME%_opensim-workspace": "/workspace",
-                        "%env.COMPOSE_PROJECT_NAME%_blender-config": "/root/.config/blender",
-                        "%env.COMPOSE_PROJECT_NAME%_blender-cache": "/root/.cache/opencode",
-                        "%env.COMPOSE_PROJECT_NAME%_blender-data": "/root/.local/share/blender"
+                        "%cfg.COMPOSE_PROJECT_NAME%_opensim-workspace": "/workspace",
+                        "%cfg.COMPOSE_PROJECT_NAME%_blender-config": "/root/.config/blender",
+                        "%cfg.COMPOSE_PROJECT_NAME%_blender-cache": "/root/.cache/opencode",
+                        "%cfg.COMPOSE_PROJECT_NAME%_blender-data": "/root/.local/share/blender"
                     },
                     /* Directories to create */
-                    "directories": {
-                        "/workspace/blender": "%env.BLENDER_PROJECT_DIR%"
-                    },
+                    "directories": [
+                        "%env.BLENDER_PROJECT_DIR%"
+                    ],
                     /* Managed files allow an add-on to drop in 
                       configuration files to other parts of the stack.
                       
