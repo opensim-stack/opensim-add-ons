@@ -30,9 +30,9 @@
 						"%env.COMPOSE_PROJECT_NAME%_blender-cache": "/root/.cache/opencode",
                         "%env.COMPOSE_PROJECT_NAME%_blender-data": "/root/.local/share/blender"
 					},
-					"directories": {
-                        "/workspace/blender": "%env.BLENDER_PROJECT_DIR%"
-                    },
+					"directories": [
+                        "%env.BLENDER_PROJECT_DIR%"
+                    ],
                     "managed": [
                         {
                         "resource": "governor-opencode.json",
