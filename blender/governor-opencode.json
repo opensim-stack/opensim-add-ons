@@ -14,7 +14,7 @@
     },
     "external_directory": {
       "/workspace/blender/**": "allow",
-      "/workspaceblender/": "allow",
+      "/workspace/blender/": "allow",
       "*": "deny"
     }
   },
