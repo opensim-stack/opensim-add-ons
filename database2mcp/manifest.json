@@ -8,7 +8,7 @@
 	    "DATABASE_MCP_TRANSPORT": "sse",
 	    "DATABASE_MCP_HOST": "0.0.0.0",
         "DATABASE_MCP_PORT": "8992",
-        "DATABASE_MCP_SSE_ROOT_PATH": "/mcp",
+        "DATABASE_MCP_SSE_ROOT_PATH": "/mcp/sse",
         "MARIADB_HOST": "opensim-ai-mariadb-1",
         "MARIADB_USER": "opensim",
         "MARIADB_PASS": "opensimpassword",
