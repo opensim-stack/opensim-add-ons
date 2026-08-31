@@ -1,0 +1,47 @@
+{
+	"name": "database2mcp",
+	"description": "Bridges the OpenSimulator Database console to MCP so bots can directly query and update data.",
+	"icon" : "database2mcp.svg",
+	"version": "0.0.1",
+	"constants": {
+	    "OPENSIM_DATABASE2MCP_IMAGE": "bithatch/opensim-database2mcp:latest",
+	    "DATABASE_MCP_TRANSPORT": "sse",
+	    "DATABASE_MCP_HOST": "0.0.0.0",
+        "DATABASE_MCP_PORT": "8992",
+        "MARIADB_HOST": "opensim-ai-mariadb-1",
+        "MARIADB_USER": "opensim",
+        "MARIADB_PASS": "opensimpassword",
+        "MARIADB_DATABASE": "opensim"
+    },
+	"extensions": {
+		"SIMULATOR": {
+			"containers": {
+				"%env.OPENSIM_CONSOLE2MCP_IMAGE%": {
+					"name": "%cfg.composeProjectName%-database2mcp",
+					"environment": {
+					    "DATABASE_MCP_TRANSPORT": "%env.DATABASE_MCP_TRANSPORT%",
+                        "DATABASE_MCP_HOST": "%env.DATABASE_MCP_HOST%",
+                        "DATABASE_MCP_PORT": "%env.DATABASE_MCP_PORT%",
+                        "JDBC_URL": "jdbc:mariadb://%env.MARIADB_HOST%:3306/%env.MARIADB_DATABASE%",
+                        "JDBC_USER": "%env.MARIADB_USER%",
+                        "JDBC_PASSWORD": "%env.MARIADB_PASS%"
+					},
+                    "managed": [
+                        {
+                        "resource": "governor-opencode.json",
+                        "dropIns": "/config/drop-ins/opencode/opencode.json.d"
+                        },
+                        {
+                        "resource": "builder-opencode.json",
+                        "dropIns": "/config/drop-ins/opencode/opencode.json.d"
+                        },
+                        {
+                        "resource": "actor-opencode.json",
+                        "dropIns": "/config/drop-ins/opencode/opencode.json.d"
+                        }
+                    ]
+				}
+			}
+		}
+	}
+}

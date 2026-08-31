@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
+<svg
+   fill="#000000"
+   width="800px"
+   height="800px"
+   viewBox="0 0 24 24"
+   version="1.1"
+   id="svg2041"
+   sodipodi:docname="console2mcp.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2045" />
+  <sodipodi:namedview
+     id="namedview2043"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="1.28375"
+     inkscape:cx="370.39922"
+     inkscape:cy="400"
+     inkscape:window-width="3440"
+     inkscape:window-height="1397"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2041" />
+  <g
+     id="g6385"
+     transform="matrix(0.50000001,0,0,0.50000001,0.03441067,0.11999976)">
+    <rect
+       x="4"
+       y="8"
+       width="40"
+       height="32"
+       rx="2"
+       fill="#2F88FF"
+       stroke="#000000"
+       stroke-width="4"
+       stroke-linejoin="round"
+       id="rect4"
+       style="fill:#000000;fill-opacity:1;stroke:#c813c4;stroke-opacity:1"
+       ry="2" />
+    <path
+       d="m 12,18 7,6 -7,6"
+       stroke="white"
+       stroke-width="4"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       id="path6"
+       style="stroke:#c813c4;stroke-opacity:1" />
+    <path
+       d="M 23,32 H 36"
+       stroke="white"
+       stroke-width="4"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       id="path8"
+       style="stroke:#c813c4;stroke-opacity:1" />
+  </g>
+  <path
+     d="M 18.78164,9.394769 V 8.3762727 A 0.68470345,0.68470345 0 0 0 18.096936,7.6915689 h -2.05411 V 7.2424034 c 0.104417,-0.093804 0.171176,-0.2286909 0.171176,-0.3800104 a 0.5135276,0.5135276 0 0 0 -1.027055,0 c 0,0.1513195 0.06676,0.2862061 0.171176,0.3800104 v 0.4491655 h -2.05411 a 0.68470345,0.68470345 0 0 0 -0.684704,0.6847038 v 1.0263698 l -0.02465,0.00174 A 0.34200938,0.34200938 0 0 0 12.276957,9.74571 v 0.684704 a 0.34235173,0.34235173 0 0 0 0.342352,0.342351 v 1.71176 a 0.68470345,0.68470345 0 0 0 0.684703,0.684703 h 4.792924 a 0.68470345,0.68470345 0 0 0 0.684703,-0.684703 v -1.71176 a 0.34235173,0.34235173 0 0 0 0.342353,-0.342351 V 9.7669362 a 0.34372113,0.34372113 0 0 0 -0.02465,-0.15577 C 19.030186,9.4440981 18.881949,9.4040434 18.781639,9.3947999 Z m -4.792924,0.3509101 c 0,-0.3779561 0.23006,-0.6847032 0.513527,-0.6847032 0.283467,0 0.513528,0.3067471 0.513528,0.6847032 0,0.3779559 -0.230061,0.6847039 -0.513528,0.6847039 -0.283467,0 -0.513527,-0.306748 -0.513527,-0.6847039 z m 3.080481,2.0541109 c -0.342695,-10e-4 -2.737787,0 -2.738129,0 v -0.684704 c 0,0 2.396804,-6.84e-4 2.739498,0 z m -0.170491,-1.369407 c -0.283467,0 -0.513528,-0.306748 -0.513528,-0.6847039 0,-0.3779561 0.230061,-0.6847032 0.513528,-0.6847032 0.283467,0 0.513527,0.3067471 0.513527,0.6847032 0,0.3779559 -0.23006,0.6847039 -0.513527,0.6847039 z"
+     id="path2039"
+     style="fill:#c813c4;fill-opacity:1;stroke-width:0.999998" />
+</svg>

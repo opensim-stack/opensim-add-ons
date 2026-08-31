@@ -1,0 +1,43 @@
+{
+	"name": "console2mcp",
+	"description": "Bridges the OpenSimulator REST console to MCP so bots can run admin commands.",
+	"icon" : "console2mcp.svg",
+	"version": "0.0.1",
+	"constants": {
+	    "OPENSIM_CONSOLE2MCP_IMAGE": "bithatch/opensim-console2mcp:latest",
+	    "CONSOLE_MCP_TRANSPORT": "http",
+	    "CONSOLE_MCP_HOST": "0.0.0.0",
+        "CONSOLE_MCP_PORT": "8996"
+    },
+	"extensions": {
+		"SIMULATOR": {
+			"containers": {
+				"%env.OPENSIM_CONSOLE2MCP_IMAGE%": {
+					"name": "%cfg.composeProjectName%-console2mcp",
+					"environment": {
+					    "CONSOLE_MCP_TRANSPORT": "%env.CONSOLE_MCP_TRANSPORT%",
+                        "CONSOLE_MCP_HOST": "%env.CONSOLE_MCP_HOST%",
+                        "CONSOLE_MCP_PORT": "%env.CONSOLE_MCP_PORT%",
+                        "OPENSIM_CONSOLE_URL": "http://%cfg.gridServices%:%sim.port%",
+                        "OPENSIM_CONSOLE_USER": "%cfg.consoleUser%",
+                        "OPENSIM_CONSOLE_PASS": "%cfg.consolePass%"
+					},
+                    "managed": [
+                        {
+                        "resource": "governor-opencode.json",
+                        "dropIns": "/config/drop-ins/opencode/opencode.json.d"
+                        },
+                        {
+                        "resource": "builder-opencode.json",
+                        "dropIns": "/config/drop-ins/opencode/opencode.json.d"
+                        },
+                        {
+                        "resource": "actor-opencode.json",
+                        "dropIns": "/config/drop-ins/opencode/opencode.json.d"
+                        }
+                    ]
+				}
+			}
+		}
+	}
+}

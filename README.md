@@ -17,10 +17,11 @@ For example, many people may not want Blender or Voice support, so these are pro
  * Users can contribute to the add-on repository through pull requests. 
  * A custom Git repository may be defined. 
  * An add-on usually consists of one **Extension**, may be may have more.
- * There are 3 **Extension** types.
-   - `STACK`. Adds a service (container) to be shared by the whole stack.
-   - `BOT`. Adds a service (container) to be used only by **Bots**.
-   - `SIMULATOR`. Adds a service (container) to be used only by **Simulators**.
+ * There are 4 **Extension** types (note only `STACK` and `SIMULATOR` are currently implemented).
+   - `STACK`. Adds a service (container) to be shared by the whole stack. There will be one instance.
+   - `SIMULATOR`. Adds a service (container) to be used only by a **Simulator** of `ROBUST` or `STANDALONE` type, i.e. the one that provides **Grid Services**. As there is only ever one `ROBUST` or `STANDALONE`, there will be one instance.
+   - `BOT`. Adds a service (container) to be used only by **Bots**, given `N` bot instances, there will be `N` add-on instances.
+   - `GRID`. Adds a service (container) to be used only by **Simulators** of `GRID` type. Given `N` grid instances, there will be `N` add-on instances.
 
 ## Creating An Add On
 

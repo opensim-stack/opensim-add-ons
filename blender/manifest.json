@@ -36,15 +36,15 @@
                     "managed": [
                         {
                         "resource": "governor-opencode.json",
-                        "dropIns": "/config/add-ons/opencode/opencode.json.d"
+                        "dropIns": "/config/drop-ins/opencode/opencode.json.d"
                         },
                         {
                         "resource": "builder-opencode.json",
-                        "dropIns": "/config/add-ons/opencode/opencode.json.d"
+                        "dropIns": "/config/drop-ins/opencode/opencode.json.d"
                         },
                         {
                         "resource": "actor-opencode.json",
-                        "dropIns": "/config/add-ons/opencode/opencode.json.d"
+                        "dropIns": "/config/drop-ins/opencode/opencode.json.d"
                         }
                     ]
 				}
