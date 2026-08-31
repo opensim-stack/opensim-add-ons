@@ -3,11 +3,8 @@
   "mcp": {
     "console2mcp": {
       "type": "remote",
-      "url": "http://%env.COMPOSE_PROJECT_NAME%-console2mcp-1:%env.CONSOLE_MCP_PORT%/mcp",
-      "enabled": true,
-      "headers": {
-        "Authorization": "Bearer %env.CONSOLE_MCP_BEARER_TOKEN%"
-      }
+      "url": "http://%env.COMPOSE_PROJECT_NAME%-database2mcp-1:%env.DATABASE_MCP_PORT%/mcp",
+      "enabled": true
     }
   }
 }
