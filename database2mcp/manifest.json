@@ -16,7 +16,7 @@
 	"extensions": {
 		"SIMULATOR": {
 			"containers": {
-				"%env.OPENSIM_CONSOLE2MCP_IMAGE%": {
+				"%env.OPENSIM_DATABASE2MCP_IMAGE%": {
 					"name": "%cfg.composeProjectName%-database2mcp",
 					"environment": {
 					    "DATABASE_MCP_TRANSPORT": "%env.DATABASE_MCP_TRANSPORT%",

@@ -9,6 +9,9 @@
 	    "CONSOLE_MCP_HOST": "0.0.0.0",
         "CONSOLE_MCP_PORT": "8996"
     },
+    "tokens": [
+        "CONSOLE_MCP_HTTP_BEARER_TOKEN"
+    ],
 	"extensions": {
 		"SIMULATOR": {
 			"containers": {
@@ -18,6 +21,7 @@
 					    "CONSOLE_MCP_TRANSPORT": "%env.CONSOLE_MCP_TRANSPORT%",
                         "CONSOLE_MCP_HOST": "%env.CONSOLE_MCP_HOST%",
                         "CONSOLE_MCP_PORT": "%env.CONSOLE_MCP_PORT%",
+                        "CONSOLE_MCP_HTTP_BEARER_TOKEN": "%token.CONSOLE_MCP_HTTP_BEARER_TOKEN%",
                         "OPENSIM_CONSOLE_URL": "http://%cfg.gridServices%:%sim.port%",
                         "OPENSIM_CONSOLE_USER": "%cfg.consoleUser%",
                         "OPENSIM_CONSOLE_PASS": "%cfg.consolePass%"
