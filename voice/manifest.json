@@ -69,7 +69,7 @@
                                 "JANUS_HTTP_ENABLE": "%env.JANUS_HTTP_ENABLE%",
                                 "JANUS_HTTP_PORT": "%env.JANUS_HTTP_PORT%",
                                 "JANUS_HTTP_BASEPATH": "%env.JANUS_HTTP_BASEPATH%",
-                                "JANUS_HTTPS_ENABLE": "%env.JANUS_HTTPS_ENABLEe%",
+                                "JANUS_HTTPS_ENABLE": "%env.JANUS_HTTPS_ENABLE%",
                                 "JANUS_HTTPS_PORT": "%env.JANUS_HTTPS_PORT%",
                                 "JANUS_HTTP_ADMIN_ENABLE": "%env.JANUS_HTTP_ADMIN_ENABLE%",
                                 "JANUS_HTTP_ADMIN_PORT": "%env.JANUS_HTTP_ADMIN_PORT%",
