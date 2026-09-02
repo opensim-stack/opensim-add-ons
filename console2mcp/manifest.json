@@ -23,8 +23,8 @@
                         "CONSOLE_MCP_PORT": "%env.CONSOLE_MCP_PORT%",
                         "CONSOLE_MCP_HTTP_BEARER_TOKEN": "%token.CONSOLE_MCP_HTTP_BEARER_TOKEN%",
                         "OPENSIM_CONSOLE_URL": "http://%cfg.gridServices%:%sim.port%",
-                        "OPENSIM_CONSOLE_USER": "%cfg.consoleUser%",
-                        "OPENSIM_CONSOLE_PASS": "%cfg.consolePass%"
+                        "OPENSIM_CONSOLE_USER": "%grid.consoleUser%",
+                        "OPENSIM_CONSOLE_PASS": "%grid.consolePass%"
 					},
                     "managed": [
                         {
