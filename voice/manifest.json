@@ -33,7 +33,7 @@
             {
                 "type": "copy",
                 "addOn": "SIMULATOR",
-                "level": "STANDLONE",
+                "level": "STANDALONE",
                 "source": "standalone-os-webrtc-janus.ini",
                 "target": "/config/sims/%sim.name%/config-include/os-webrtc-janus.ini"
             },{
@@ -56,7 +56,7 @@
             {
                 "type": "delete",
                 "addOn": "SIMULATOR",
-                "level": "STANDLONE",
+                "level": "STANDALONE",
                 "path": "/config/sims/%sim.name%/config-include/os-webrtc-janus.ini"
             },{
                 "type": "delete",
