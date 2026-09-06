@@ -1,0 +1,132 @@
+{
+	"name": "voice",
+	"description": "[WIP - Doesn't work yet] Adds voice abilities to bots by the way of Piper and Janus.",
+	"icon": "voice.svg",
+	"version": "0.0.1",
+	"tokens": [
+	   "JANUS_API_TOKEN",
+	   "JANUS_ADMIN_TOKEN"
+    ],
+	"constants": {
+		"OPENSIM_PIPER_IMAGE": "bithatch/opensim-piper:latest",
+		"OPENSIM_JANUS_IMAGE": "misterblue/os-webrtc-janus-docker:latest",
+		"JANUS_HTTP_PORT" : "14223",
+        "JANUS_ADMIN_PORT" : "14225",
+        "JANUS_UDP_RTP_MIN" : "10000",
+        "JANUS_UDP_RTP_MAX" : "10200",
+        "JANUS_SERVER_NAME": "GridVoice",
+        "JANUS_HTTP_ENABLE": "true",
+        "JANUS_HTTP_BASEPATH": "/voice",
+        "JANUS_HTTPS_ENABLE": "false",
+        "JANUS_HTTPS_PORT": "14224",
+        "JANUS_HTTP_ADMIN_ENABLE": "true",
+        "JANUS_HTTP_ADMIN_PORT": "14225",
+        "JANUS_HTTP_ADMIN_BASEPATH": "/voiceAdmin",
+		"PIPER_HTTP_HOST": "0.0.0.0",
+		"PIPER_HTTP_PORT": "8995",
+		"PIPER_DEFAULT_VOICE": "en_US-lessac-medium",
+		"PIPER_TIMEOUT_SECONDS": "60",
+		"OPENSIM_JANUS_PUBLIC_HOST": "%env.OPENSIM_HOSTNAME%"
+	},
+	"hooks": {
+        "POST_INSTALL": [
+            {
+                "type": "copy",
+                "addOn": "SIMULATOR",
+                "level": "STANDLONE",
+                "source": "standalone-os-webrtc-janus.ini",
+                "target": "/config/sims/%sim.name%/config-include/os-webrtc-janus.ini"
+            },{
+                "type": "copy",
+                "addOn": "SIMULATOR",
+                "level": "GRID",
+                "source": "grid-os-webrtc-janus.ini",
+                "target": "/config/sims/%sim.name%/config-include/os-webrtc-janus.ini"
+            },{
+                "type": "createIniKey",
+                "addOn": "SIMULATOR",
+                "level": "ROBUST",
+                "path": "/config/sims/%sim.name%/Robust.ini",
+                "section": "ServiceList",
+                "key": "VoiceServiceConnector",
+                "value": "${Const|PrivatePort}/WebRtcVoice.dll:WebRtcVoiceServerConnector"
+            }
+        ],
+        "PRE_UNINSTALL": [
+            {
+                "type": "delete",
+                "addOn": "SIMULATOR",
+                "level": "STANDLONE",
+                "path": "/config/sims/%sim.name%/config-include/os-webrtc-janus.ini"
+            },{
+                "type": "delete",
+                "addOn": "SIMULATOR",
+                "level": "GRID",
+                "path": "/config/sims/%sim.name%/config-include/os-webrtc-janus.ini"
+            },{
+                "type": "deleteIniKey",
+                "addOn": "SIMULATOR",
+                "level": "ROBUST",
+                "path": "/config/sims/%sim.name%/Robust.ini",
+                "section": "ServiceList",
+                "key": "VoiceServiceConnector"
+            }
+        ]
+    },
+	"extensions": {
+		"STACK": {
+			"containers": {
+				"%env.OPENSIM_PIPER_IMAGE%": {
+					"name": "%cfg.composeProjectName%-piper",
+					"environment": {
+						"PIPER_HTTP_HOST": "%env.PIPER_HTTP_HOST%",
+						"PIPER_HTTP_PORT": "%env.PIPER_HTTP_PORT%",
+						"PIPER_DEFAULT_VOICE": "%env.PIPER_DEFAULT_VOICE%",
+						"PIPER_TIMEOUT_SECONDS": "%env.PIPER_TIMEOUT_SECONDS%"
+					},
+					"volumes": {
+						"piper-voices" : "/voices"
+					}
+				},
+				"%env.OPENSIM_JANUS_IMAGE%": {
+                    "name": "%cfg.composeProjectName%-janus",
+                    "volumes": {
+                        "opensim-janus-config" : "/opt/janus/etc/janus"
+                    },
+                    "ports": {
+                        "%env.JANUS_HTTP_PORT%/tcp": "%env.JANUS_HTTP_PORT%",
+                        "%env.JANUS_ADMIN_PORT%/tcp": "%env.JANUS_ADMIN_PORT%",
+                        "%env.JANUS_UDP_RTP_MIN%-%env.JANUS_UDP_RTP_MAX%/udp": "%env.JANUS_UDP_RTP_MIN%-%env.JANUS_UDP_RTP_MAX%"
+                    },
+                    "healthcheck": {
+                        "test": ["CMD", "curl", "-f", "http://localhost:%env.JANUS_HTTP_PORT%/"],
+                        "interval": 10,
+                        "timeout": 5,
+                        "retries": 24,
+                        "startPeriod": 15
+                    },
+                    "init" : {
+                        "%env.OPENSIM_JANUS_IMAGE%": {
+                            "volumes": {
+                                "opensim-janus-config" : "/janus-config"
+                            },
+                            "environment": {
+                                "JANUS_SERVER_NAME": "%env.JANUS_SERVER_NAME%",
+                                "JANUS_HTTP_ENABLE": "%env.JANUS_HTTP_ENABLE%",
+                                "JANUS_HTTP_PORT": "%env.JANUS_HTTP_PORT%",
+                                "JANUS_HTTP_BASEPATH": "%env.JANUS_HTTP_BASEPATH%",
+                                "JANUS_HTTPS_ENABLE": "%env.JANUS_HTTPS_ENABLE%",
+                                "JANUS_HTTPS_PORT": "%env.JANUS_HTTPS_PORT%",
+                                "JANUS_HTTP_ADMIN_ENABLE": "%env.JANUS_HTTP_ADMIN_ENABLE%",
+                                "JANUS_HTTP_ADMIN_PORT": "%env.JANUS_HTTP_ADMIN_PORT%",
+                                "JANUS_HTTP_ADMIN_BASEPATH": "%env.JANUS_HTTP_ADMIN_BASEPATH%",
+                                "JANUS_API_TOKEN": "%token.JANUS_API_TOKEN%",
+                                "JANUS_ADMIN_TOKEN": "%token.JANUS_ADMIN_TOKEN%"
+                            }
+                        }
+                    }
+                }
+			}
+		}
+	}
+}
