@@ -8,6 +8,8 @@
 	   "JANUS_ADMIN_TOKEN"
     ],
 	"constants": {
+	    "VOICE_ROUTING_ENABLED": "true",
+        "VOICE_BACKEND": "webrtc",
 		"OPENSIM_PIPER_IMAGE": "bithatch/opensim-piper:latest",
 		"OPENSIM_JANUS_IMAGE": "misterblue/os-webrtc-janus-docker:latest",
 		"JANUS_HTTP_PORT" : "14223",
@@ -23,11 +25,27 @@
         "JANUS_HTTP_ADMIN_PORT": "14225",
         "JANUS_HTTP_ADMIN_BASEPATH": "/voiceAdmin",
 		"PIPER_HTTP_HOST": "0.0.0.0",
-		"PIPER_HTTP_PORT": "8995",
+        "PIPER_SCHEME": "http",
+        "PIPER_HOST": "%cfg.composeProjectName%-piper",
+		"PIPER_PORT": "8995",
+		"PIPER_TTS_PATH": "/tts",
+		"PIPER_VOICES_PATH": "/voices",
 		"PIPER_DEFAULT_VOICE": "en_US-lessac-medium",
+		"PIPER_REQUEST_TIMEOUT_SECONDS": "60",
 		"PIPER_TIMEOUT_SECONDS": "60",
 		"OPENSIM_JANUS_PUBLIC_HOST": "%env.OPENSIM_HOSTNAME%"
 	},
+	"exports": [
+        "VOICE_ROUTING_ENABLED",
+        "VOICE_BACKEND",
+        "PIPER_SCHEME",
+        "PIPER_HOST",
+        "PIPER_PORT",
+        "PIPER_TTS_PATH",
+        "PIPER_VOICES_PATH",
+        "PIPER_REQUEST_TIMEOUT_SECONDS",
+        "PIPER_DEFAULT_VOICE"
+    ],
 	"hooks": {
         "POST_INSTALL": [
             {
@@ -50,6 +68,70 @@
                 "section": "ServiceList",
                 "key": "VoiceServiceConnector",
                 "value": "${Const|PrivatePort}/WebRtcVoice.dll:WebRtcVoiceServerConnector"
+            },{
+                "type": "createIniKey",
+                "addOn": "SIMULATOR",
+                "level": "ROBUST",
+                "path": "/config/sims/%sim.name%/Robust.ini",
+                "section": "WebRtcVoice",
+                "key": "Enabled",
+                "value": "true"
+            },{
+                "type": "createIniKey",
+                "addOn": "SIMULATOR",
+                "level": "ROBUST",
+                "path": "/config/sims/%sim.name%/Robust.ini",
+                "section": "WebRtcVoice",
+                "key": "SpatialVoiceService",
+                "value": "WebRtcJanusService.dll:WebRtcJanusService"
+            },{
+                "type": "createIniKey",
+                "addOn": "SIMULATOR",
+                "level": "ROBUST",
+                "path": "/config/sims/%sim.name%/Robust.ini",
+                "section": "WebRtcVoice",
+                "key": "NonSpatialVoiceService",
+                "value": "WebRtcJanusService.dll:WebRtcJanusService"
+            },{
+                "type": "createIniKey",
+                "addOn": "SIMULATOR",
+                "level": "ROBUST",
+                "path": "/config/sims/%sim.name%/Robust.ini",
+                "section": "JanusWebRtcVoice",
+                "key": "JanusGatewayURI",
+                "value": "http://%env.OPENSIM_JANUS_PUBLIC_HOST%:%env.JANUS_HTTP_ADMIN_PORT%%env.JANUS_HTTP_BASEPATH%"
+            },{
+                "type": "createIniKey",
+                "addOn": "SIMULATOR",
+                "level": "ROBUST",
+                "path": "/config/sims/%sim.name%/Robust.ini",
+                "section": "JanusWebRtcVoice",
+                "key": "APIToken",
+                "value": "%token.JANUS_API_TOKEN%"
+            },{
+                "type": "createIniKey",
+                "addOn": "SIMULATOR",
+                "level": "ROBUST",
+                "path": "/config/sims/%sim.name%/Robust.ini",
+                "section": "JanusWebRtcVoice",
+                "key": "JanusGatewayAdminURI",
+                "value": "http://%env.OPENSIM_JANUS_PUBLIC_HOST%:%env.JANUS_HTTP_ADMIN_PORT%%env.JANUS_HTTP_ADMIN_BASEPATH%"
+            },{
+                "type": "createIniKey",
+                "addOn": "SIMULATOR",
+                "level": "ROBUST",
+                "path": "/config/sims/%sim.name%/Robust.ini",
+                "section": "JanusWebRtcVoice",
+                "key": "AdminAPIToken",
+                "value": "%token.JANUS_ADMIN_TOKEN%"
+            },{
+                "type": "createIniKey",
+                "addOn": "SIMULATOR",
+                "level": "ROBUST",
+                "path": "/config/sims/%sim.name%/Robust.ini",
+                "section": "JanusWebRtcVoice",
+                "key": "MessageDetails",
+                "value": "true"
             }
         ],
         "PRE_UNINSTALL": [
@@ -64,12 +146,24 @@
                 "level": "GRID",
                 "path": "/config/sims/%sim.name%/config-include/os-webrtc-janus.ini"
             },{
-                "type": "deleteIniKey",
+                "type": "deleteIni",
                 "addOn": "SIMULATOR",
                 "level": "ROBUST",
                 "path": "/config/sims/%sim.name%/Robust.ini",
                 "section": "ServiceList",
                 "key": "VoiceServiceConnector"
+            },{
+                "type": "deleteIni",
+                "addOn": "SIMULATOR",
+                "level": "ROBUST",
+                "path": "/config/sims/%sim.name%/Robust.ini",
+                "section": "WebRtcVoice"
+            },{
+                "type": "deleteIni",
+                "addOn": "SIMULATOR",
+                "level": "ROBUST",
+                "path": "/config/sims/%sim.name%/Robust.ini",
+                "section": "JanusWebRtcVoice"
             }
         ]
     },
@@ -80,7 +174,7 @@
 					"name": "%cfg.composeProjectName%-piper",
 					"environment": {
 						"PIPER_HTTP_HOST": "%env.PIPER_HTTP_HOST%",
-						"PIPER_HTTP_PORT": "%env.PIPER_HTTP_PORT%",
+						"PIPER_HTTP_PORT": "%env.PIPER_PORT%",
 						"PIPER_DEFAULT_VOICE": "%env.PIPER_DEFAULT_VOICE%",
 						"PIPER_TIMEOUT_SECONDS": "%env.PIPER_TIMEOUT_SECONDS%"
 					},

@@ -12,7 +12,6 @@ Adds voice capabilities by ...
 OPENSIM_PIPER_IMAGE=bithatch/opensim-piper:latest
 OPENSIM_JANUS_IMAGE=misterblue/os-webrtc-janus-docker:latest
 
-OPENSIM_WEBRTC_VOICE_ENABLED=true
 OPENSIM_JANUS_PUBLIC_HOST=${OPENSIM_HOSTNAME}
 
 JANUS_SERVER_NAME=GridVoice
