@@ -28,6 +28,9 @@
                         "JDBC_USER": "%env.MARIADB_USER%",
                         "JDBC_PASSWORD": "%env.MARIADB_PASS%"
 					},
+                    "ports": {
+                        "%env.DATABASE_MCP_PORT%/tcp": "%env.DATABASE_MCP_PORT%"
+                    },
                     "managed": [
                         {
                         "resource": "governor-opencode.json",
