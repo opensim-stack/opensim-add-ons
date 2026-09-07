@@ -1,6 +1,6 @@
 {
 	"name": "voice",
-	"description": "[WIP - Doesn't work yet] Adds voice abilities to bots by the way of Piper and Janus.",
+	"description": "Adds voice abilities to bots by the way of Piper and Janus.",
 	"icon": "voice.svg",
 	"version": "0.0.1",
 	"tokens": [
