@@ -3,7 +3,7 @@
   "mcp": {
     "database2mcp": {
       "type": "remote",
-      "url": "http://%env.COMPOSE_PROJECT_NAME%-database2mcp:%env.DATABASE_MCP_PORT%/mcp",
+      "url": "http://%env.COMPOSE_PROJECT_NAME%-database2mcp:%env.DATABASE_MCP_PORT%%env.DATABASE_MCP_SSE_ROOT_PATH%",
       "enabled": true
     }
   }
