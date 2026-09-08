@@ -201,7 +201,7 @@
                     },
                     "init" : {
                         "%env.OPENSIM_JANUS_IMAGE%": {
-                            "entryPoint": ["/bin/bash", "-c", "/config/add-ons/voice/init.sh"],
+                            "entrypoint": ["/bin/bash", "-c", "/config/add-ons/voice/init.sh"],
                             "volumes": {
                                 "opensim-janus-config" : "/janus-config",
                                 "%env.COMPOSE_PROJECT_NAME%_opensim-config": "/config"
