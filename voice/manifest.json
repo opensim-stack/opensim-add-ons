@@ -202,7 +202,8 @@
                     "init" : {
                         "%env.OPENSIM_JANUS_IMAGE%": {
                             "volumes": {
-                                "opensim-janus-config" : "/janus-config"
+                                "opensim-janus-config" : "/janus-config",
+                                "/add-on" : "/config/add-ons/voice"
                             },
                             "environment": {
                                 "JANUS_SERVER_NAME": "%env.JANUS_SERVER_NAME%",
