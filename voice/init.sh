@@ -17,7 +17,9 @@ JANUS_HTTP_ADMIN_BASEPATH="${JANUS_HTTP_ADMIN_BASEPATH:-/voiceAdmin}"
 JANUS_API_TOKEN="${JANUS_API_TOKEN:-change-me-api-token}"
 JANUS_ADMIN_TOKEN="${JANUS_ADMIN_TOKEN:-change-me-admin-token}"
 
-mkdir -p "${JANUS_CONFIG_DIR}"
+if [ ! -d "${JANUS_CONFIG_DIR}" ]; then
+    mkdir -p "${JANUS_CONFIG_DIR}"
+fi
 cp -a "${JANUS_TEMPLATE_DIR}/." "${JANUS_CONFIG_DIR}/"
 
 # Mirror the upstream os-webrtc-janus-docker substitutions for API/admin endpoints.
