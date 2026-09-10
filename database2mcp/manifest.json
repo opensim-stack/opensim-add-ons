@@ -9,9 +9,8 @@
 	    "DATABASE_MCP_HOST": "0.0.0.0",
         "DATABASE_MCP_PORT": "8992",
         "DATABASE_MCP_SSE_ROOT_PATH": "/mcp/sse",
-        "MARIADB_HOST": "opensim-ai-mariadb-1",
+        "MARIADB_HOST": "%env.COMPOSE_PROJECT_NAMEE%-mariadb",
         "MARIADB_USER": "opensim",
-        "MARIADB_PASS": "opensimpassword",
         "MARIADB_DATABASE": "opensim"
     },
 	"extensions": {
@@ -26,7 +25,7 @@
                         "DATABASE_MCP_SSE_ROOT_PATH": "%env.DATABASE_MCP_SSE_ROOT_PATH%",
                         "JDBC_URL": "jdbc:mariadb://%env.MARIADB_HOST%:3306/%env.MARIADB_DATABASE%",
                         "JDBC_USER": "%env.MARIADB_USER%",
-                        "JDBC_PASSWORD": "%env.MARIADB_PASS%"
+                        "JDBC_PASSWORD": "%token.MARIADB_PASSWORD%"
 					},
                     "managed": [
                         {
