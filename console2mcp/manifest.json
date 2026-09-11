@@ -4,7 +4,7 @@
 	"icon" : "console2mcp.svg",
 	"version": "0.0.1",
 	"constants": {
-	    "OPENSIM_CONSOLE2MCP_IMAGE": "%cfg.group%opensim-console2mcp:%cfg.tag%",
+	    "OPENSIM_CONSOLE2MCP_IMAGE": "%cfg.group%opensim-console2mcp:%grid.updates.tag%",
 	    "CONSOLE_MCP_TRANSPORT": "http",
 	    "CONSOLE_MCP_HOST": "0.0.0.0",
         "CONSOLE_MCP_PORT": "8996"

@@ -4,7 +4,7 @@
 	"icon" : "database2mcp.svg",
 	"version": "0.0.1",
 	"constants": {
-	    "OPENSIM_DATABASE2MCP_IMAGE": "%cfg.group%opensim-database2mcp:%cfg.tag%",
+	    "OPENSIM_DATABASE2MCP_IMAGE": "%cfg.group%opensim-database2mcp:%grid.updates.tag%",
 	    "DATABASE_MCP_TRANSPORT": "sse",
 	    "DATABASE_MCP_HOST": "0.0.0.0",
         "DATABASE_MCP_PORT": "8992",

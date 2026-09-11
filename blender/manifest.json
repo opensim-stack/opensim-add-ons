@@ -4,7 +4,7 @@
 	"icon" : "blender.svg",
 	"version": "0.0.1",
 	"constants": {
-	    "OPENSIM_BLENDER_IMAGE": "%cfg.group%opensim-blender:%cfg.tag%",
+	    "OPENSIM_BLENDER_IMAGE": "%cfg.group%opensim-blender:%grid.updates.tag%",
 	    "BLENDER_MCP_HOST": "0.0.0.0",
         "BLENDER_MCP_PORT": "8996",
         "BLENDER_TCP_PROTOCOL_HOST" : "127.0.0.1",
