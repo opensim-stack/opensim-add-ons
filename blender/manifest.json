@@ -4,7 +4,7 @@
 	"icon" : "blender.svg",
 	"version": "0.0.1",
 	"constants": {
-	    "OPENSIM_BLENDER_IMAGE": "bithatch/opensim-blender:latest",
+	    "OPENSIM_BLENDER_IMAGE": "%cfg.group%opensim-blender:%cfg.tag%",
 	    "BLENDER_MCP_HOST": "0.0.0.0",
         "BLENDER_MCP_PORT": "8996",
         "BLENDER_TCP_PROTOCOL_HOST" : "127.0.0.1",
@@ -15,7 +15,7 @@
 		"STACK": {
 			"containers": {
 				"%env.OPENSIM_BLENDER_IMAGE%": {
-					"name": "%cfg.composeProjectName%-blender",
+					"name": "%cfg.projectName%-blender",
 					"environment": {
                         "BLENDER_MCP_HOST": "%env.BLENDER_MCP_HOST%",
                         "BLENDER_MCP_PORT": "%env.BLENDER_MCP_PORT%",
@@ -25,10 +25,10 @@
                         "BLENDER_EXTRA_ARGS": "%env.BLENDER_EXTRA_ARGS%"
 					},
 					"volumes": {
-						"%cfg.composeProjectName%_opensim-workspace": "/workspace",
-						"%cfg.composeProjectName%_blender-config": "/root/.config/blender",
-						"%cfg.composeProjectName%_blender-cache": "/root/.cache/opencode",
-                        "%cfg.composeProjectName%_blender-data": "/root/.local/share/blender"
+						"%cfg.projectName%_opensim-workspace": "/workspace",
+						"%cfg.projectName%_blender-config": "/root/.config/blender",
+						"%cfg.projectName%_blender-cache": "/root/.cache/opencode",
+                        "%cfg.projectName%_blender-data": "/root/.local/share/blender"
 					},
 					"directories": [
                         "%env.BLENDER_PROJECT_DIR%"

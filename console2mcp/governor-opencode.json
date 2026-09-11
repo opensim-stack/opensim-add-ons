@@ -3,7 +3,7 @@
   "mcp": {
     "console2mcp": {
       "type": "remote",
-      "url": "http://%env.COMPOSE_PROJECT_NAME%-console2mcp:%env.CONSOLE_MCP_PORT%/mcp",
+      "url": "http://%cfg.projectName%-console2mcp:%env.CONSOLE_MCP_PORT%/mcp",
       "enabled": true,
       "headers": {
         "Authorization": "Bearer %token.CONSOLE_MCP_HTTP_BEARER_TOKEN%"
