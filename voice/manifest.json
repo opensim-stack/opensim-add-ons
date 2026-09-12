@@ -10,7 +10,7 @@
 	"constants": {
 	    "VOICE_ROUTING_ENABLED": "true",
         "VOICE_BACKEND": "webrtc",
-		"OPENSIM_PIPER_IMAGE": "bithatch/opensim-piper:latest",
+		"OPENSIM_PIPER_IMAGE": "%cfg.group%opensim-piper:%grid.updates.tag%",
 		"OPENSIM_JANUS_IMAGE": "misterblue/os-webrtc-janus-docker:latest",
 		"JANUS_HTTP_PORT" : "14223",
         "JANUS_ADMIN_PORT" : "14225",
@@ -26,14 +26,14 @@
         "JANUS_HTTP_ADMIN_BASEPATH": "/voiceAdmin",
 		"PIPER_HTTP_HOST": "0.0.0.0",
         "PIPER_SCHEME": "http",
-        "PIPER_HOST": "%cfg.composeProjectName%-piper",
+        "PIPER_HOST": "%cfg.projectName%-piper",
 		"PIPER_PORT": "8995",
 		"PIPER_TTS_PATH": "/tts",
 		"PIPER_VOICES_PATH": "/voices",
 		"PIPER_DEFAULT_VOICE": "en_US-lessac-medium",
 		"PIPER_REQUEST_TIMEOUT_SECONDS": "60",
 		"PIPER_TIMEOUT_SECONDS": "60",
-		"OPENSIM_JANUS_PUBLIC_HOST": "%env.OPENSIM_HOSTNAME%"
+		"OPENSIM_JANUS_PUBLIC_HOST": "%cfg.HOSTNAME%"
 	},
 	"exports": [
         "VOICE_ROUTING_ENABLED",
@@ -171,7 +171,7 @@
 		"STACK": {
 			"containers": {
 				"%env.OPENSIM_PIPER_IMAGE%": {
-					"name": "%cfg.composeProjectName%-piper",
+					"name": "%cfg.projectName%-piper",
 					"environment": {
 						"PIPER_HTTP_HOST": "%env.PIPER_HTTP_HOST%",
 						"PIPER_HTTP_PORT": "%env.PIPER_PORT%",
@@ -179,13 +179,13 @@
 						"PIPER_TIMEOUT_SECONDS": "%env.PIPER_TIMEOUT_SECONDS%"
 					},
 					"volumes": {
-						"%env.COMPOSE_PROJECT_NAME%_piper-voices" : "/voices"
+						"%cfg.projectName%_piper-voices" : "/voices"
 					}
 				},
 				"%env.OPENSIM_JANUS_IMAGE%": {
-                    "name": "%cfg.composeProjectName%-janus",
+                    "name": "%cfg.projectName%-janus",
                     "volumes": {
-                        "%env.COMPOSE_PROJECT_NAME%_opensim-janus-config" : "/opt/janus/etc/janus"
+                        "%cfg.projectName%_opensim-janus-config" : "/opt/janus/etc/janus"
                     },
                     "ports": {
                         "%env.JANUS_HTTP_PORT%/tcp": "%env.JANUS_HTTP_PORT%",
@@ -203,8 +203,8 @@
                         "%env.OPENSIM_JANUS_IMAGE%": {
                             "entrypoint": ["/bin/bash", "/config/add-ons/voice/init.sh"],
                             "volumes": {
-                                "%env.COMPOSE_PROJECT_NAME%_opensim-janus-config" : "/janus-config",
-                                "%env.COMPOSE_PROJECT_NAME%_opensim-config": "/config"
+                                "%cfg.projectName%_opensim-janus-config" : "/janus-config",
+                                "%cfg.projectName%_opensim-config": "/config"
                             },
                             "environment": {
                                 "JANUS_SERVER_NAME": "%env.JANUS_SERVER_NAME%",
