@@ -31,6 +31,9 @@
 						"FIRECRAWL_API_KEY": "%env.FIRECRAWL_API_KEY%",
 						"FIRECRAWL_API_URL": "%env.FIRECRAWL_API_URL%"
 					},
+                    "ports": {
+                        "3000/tcp": "3000"
+                    },
 					"managed": [
 						{
 							"resource": "governor-opencode.json",
