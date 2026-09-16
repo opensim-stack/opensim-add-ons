@@ -32,7 +32,7 @@
 						"FIRECRAWL_API_URL": "%env.FIRECRAWL_API_URL%"
 					},
                     "ports": {
-                        "3000/tcp": "3000"
+                        "8991/tcp": "%env.WEB2MCP_PORT%"
                     },
 					"managed": [
 						{
