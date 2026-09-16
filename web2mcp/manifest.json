@@ -4,7 +4,7 @@
 	"icon": "web2mcp.svg",
 	"version": "0.0.1",
 	"constants": {
-		"OPENSIM_WEB2MCP_IMAGE": "mcp/server/firecrawl:latest",
+		"OPENSIM_WEB2MCP_IMAGE": "mcp/firecrawl:latest",
 		"WEB2MCP_TRANSPORT": "http",
 		"WEB2MCP_HOST": "0.0.0.0",
 		"WEB2MCP_PORT": "8991",
