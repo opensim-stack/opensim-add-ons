@@ -1,6 +1,6 @@
 {
 	"name": "database2mcp",
-	"description": "Bridges the OpenSimulator Database console to MCP so bots can directly query and update data.",
+	"description": "Bridges the OpenSimulator Database console to MCP so bots can directly query and update data. Can also be used to bridge other MariaDB servers to MCP (other drivers can be added on request).",
 	"icon" : "database2mcp.svg",
 	"version": "0.0.1",
 	"constants": {

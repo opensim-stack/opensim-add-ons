@@ -6,11 +6,10 @@
 	"constants": {
 		"OPENSIM_WEB2MCP_IMAGE": "mcp/firecrawl:latest",
 		"WEB2MCP_TRANSPORT": "http",
-		"WEB2MCP_HOST": "0.0.0.0",
-		"WEB2MCP_PORT": "8991",
+		"WEB2MCP_PORT": "3000",
 		"WEB2MCP_ENDPOINT": "/mcp",
 		"FIRECRAWL_API_URL": "https://api.firecrawl.dev",
-		"FIRECRAWL_API_KEY": "YOUR_FIRECRAWL_API_KEY"
+		"FIRECRAWL_API_KEY": ""
 	},
 	"tokens": [
 		"WEB2MCP_HTTP_BEARER_TOKEN"
@@ -28,11 +27,7 @@
 				"%env.OPENSIM_WEB2MCP_IMAGE%": {
 					"name": "%cfg.projectName%-web2mcp",
 					"environment": {
-						"MCP_TRANSPORT": "%env.WEB2MCP_TRANSPORT%",
-						"MCP_HOST": "%env.WEB2MCP_HOST%",
-						"MCP_PORT": "%env.WEB2MCP_PORT%",
-						"MCP_HTTP_ENDPOINT": "%env.WEB2MCP_ENDPOINT%",
-						"MCP_HTTP_BEARER_TOKEN": "%token.WEB2MCP_HTTP_BEARER_TOKEN%",
+						"HTTP_STREAMABLE_SERVER": "true",
 						"FIRECRAWL_API_KEY": "%env.FIRECRAWL_API_KEY%",
 						"FIRECRAWL_API_URL": "%env.FIRECRAWL_API_URL%"
 					},
