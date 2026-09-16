@@ -1,0 +1,13 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "web2mcp": {
+      "type": "remote",
+      "url": "http://%cfg.projectName%-web2mcp:%env.WEB2MCP_PORT%%env.WEB2MCP_ENDPOINT%",
+      "enabled": true,
+      "headers": {
+        "Authorization": "Bearer %token.WEB2MCP_HTTP_BEARER_TOKEN%"
+      }
+    }
+  }
+}
