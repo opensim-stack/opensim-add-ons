@@ -27,7 +27,7 @@
 				"%env.OPENSIM_WEB2MCP_IMAGE%": {
 					"name": "%cfg.projectName%-web2mcp",
 					"environment": {
-				        "HOST": "127.0.0.1",
+				        "HOST": "0.0.0.0",
 						"HTTP_STREAMABLE_SERVER": "true",
 						"FIRECRAWL_API_KEY": "%env.FIRECRAWL_API_KEY%",
 						"FIRECRAWL_API_URL": "%env.FIRECRAWL_API_URL%"
