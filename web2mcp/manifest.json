@@ -12,7 +12,6 @@
 		"FIRECRAWL_API_KEY": ""
 	},
 	"tokens": [
-		"WEB2MCP_HTTP_BEARER_TOKEN"
 	],
     "configuration": [
         {
