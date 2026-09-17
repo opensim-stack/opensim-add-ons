@@ -1,6 +1,6 @@
 {
 	"name": "web2mcp",
-	"description": "Adds a Firecrawl MCP server so OpenCode agents can browse and extract web content.",
+	"description": "Adds a Firecrawl MCP server so OpenCode agents can browse and extract web content. Note that bots do have some basic web fetching capabiltiies, this supercharges those abilties!",
 	"icon": "web2mcp.svg",
 	"version": "0.0.1",
 	"constants": {
@@ -31,9 +31,6 @@
 						"FIRECRAWL_API_KEY": "%env.FIRECRAWL_API_KEY%",
 						"FIRECRAWL_API_URL": "%env.FIRECRAWL_API_URL%"
 					},
-                    "ports": {
-                        "%env.WEB2MCP_PORT%/tcp": "8991"
-                    },
 					"managed": [
 						{
 							"resource": "governor-opencode.json",
