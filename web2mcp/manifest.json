@@ -1,0 +1,52 @@
+{
+	"name": "web2mcp",
+	"description": "Adds a Firecrawl MCP server so OpenCode agents can browse and extract web content. Note that bots do have some basic web fetching capabiltiies, this supercharges those abilties!",
+	"icon": "web2mcp.svg",
+	"version": "0.0.1",
+	"constants": {
+		"OPENSIM_WEB2MCP_IMAGE": "mcp/firecrawl:latest",
+		"WEB2MCP_TRANSPORT": "http",
+		"WEB2MCP_PORT": "3000",
+		"WEB2MCP_ENDPOINT": "/mcp",
+		"FIRECRAWL_API_URL": "https://api.firecrawl.dev",
+		"FIRECRAWL_API_KEY": ""
+	},
+	"tokens": [
+	],
+    "configuration": [
+        {
+            "name": "FIRECRAWL_API_KEY",
+            "type": "TEXT",
+            "description": "Firecrawl API Key. Sign-up at https://www.firecrawl.dev/."
+        }
+    ],
+	"extensions": {
+		"STACK": {
+			"containers": {
+				"%env.OPENSIM_WEB2MCP_IMAGE%": {
+					"name": "%cfg.projectName%-web2mcp",
+					"environment": {
+				        "HOST": "0.0.0.0",
+						"HTTP_STREAMABLE_SERVER": "true",
+						"FIRECRAWL_API_KEY": "%env.FIRECRAWL_API_KEY%",
+						"FIRECRAWL_API_URL": "%env.FIRECRAWL_API_URL%"
+					},
+					"managed": [
+						{
+							"resource": "governor-opencode.json",
+							"dropIns": "/config/drop-ins/opencode/opencode.json.d"
+						},
+						{
+							"resource": "builder-opencode.json",
+							"dropIns": "/config/drop-ins/opencode/opencode.json.d"
+						},
+						{
+							"resource": "actor-opencode.json",
+							"dropIns": "/config/drop-ins/opencode/opencode.json.d"
+						}
+					]
+				}
+			}
+		}
+	}
+}

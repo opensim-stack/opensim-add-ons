@@ -7,7 +7,7 @@
 	    "OPENSIM_CONSOLE2MCP_IMAGE": "%cfg.group%opensim-console2mcp:%grid.updates.tag%",
 	    "CONSOLE_MCP_TRANSPORT": "http",
 	    "CONSOLE_MCP_HOST": "0.0.0.0",
-        "CONSOLE_MCP_PORT": "8996"
+        "CONSOLE_MCP_PORT": "8997"
     },
     "tokens": [
         "CONSOLE_MCP_HTTP_BEARER_TOKEN"

@@ -35,6 +35,13 @@
 		"PIPER_TIMEOUT_SECONDS": "60",
 		"OPENSIM_JANUS_PUBLIC_HOST": "%cfg.HOSTNAME%"
 	},
+	"configuration": [
+        {
+            "name": "PIPER_DEFAULT_VOICE",
+            "type": "TEXT",
+            "description": "Default Piper voice name."
+        }
+	],
 	"exports": [
         "VOICE_ROUTING_ENABLED",
         "VOICE_BACKEND",
