@@ -11,6 +11,9 @@
         "BLENDER_TCP_PROTOCOL_PORT" : "9876",
         "BLENDER_PROJECT_DIR" : "%cfg.workspaceDir%/blender"
     },
+    "reconfigures": [
+        "opencode-extensions"
+    ],
     "hooks": {
         "POST_INSTALL": [
             {

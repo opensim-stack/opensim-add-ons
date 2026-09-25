@@ -53,6 +53,10 @@
         "PIPER_REQUEST_TIMEOUT_SECONDS",
         "PIPER_DEFAULT_VOICE"
     ],
+    "reconfigures": [
+        "opencode-extensions",
+        "opensim-extensions"
+    ],
 	"hooks": {
         "POST_INSTALL": [
             {

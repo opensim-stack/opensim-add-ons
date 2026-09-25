@@ -20,6 +20,9 @@
             "description": "Firecrawl API Key. Sign-up at https://www.firecrawl.dev/."
         }
     ],
+    "reconfigures": [
+        "opencode-extensions"
+    ],
     "hooks": {
         "POST_INSTALL": [
             {

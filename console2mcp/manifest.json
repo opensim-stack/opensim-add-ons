@@ -12,6 +12,9 @@
     "tokens": [
         "CONSOLE_MCP_HTTP_BEARER_TOKEN"
     ],
+    "reconfigures": [
+        "opencode-extensions"
+    ],
     "hooks": {
         "POST_INSTALL": [
             {

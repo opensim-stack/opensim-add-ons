@@ -8,6 +8,9 @@
 		"FIRESTORM_MCP_ENDPOINT": "/mcp",
 		"FIRESTORM_MCP_PORT": "8000"
 	},
+    "reconfigures": [
+        "opencode-extensions"
+    ],
     "hooks": {
         "POST_INSTALL": [
             {

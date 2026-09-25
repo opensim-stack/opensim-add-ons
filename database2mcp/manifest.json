@@ -13,6 +13,9 @@
         "MARIADB_USER": "opensim",
         "MARIADB_DATABASE": "opensim"
     },
+    "reconfigures": [
+        "opencode-extensions"
+    ],
     "hooks": {
         "POST_INSTALL": [
             {
