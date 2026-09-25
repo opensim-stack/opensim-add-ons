@@ -1,6 +1,6 @@
 {
 	"name": "web2mcp",
-	"description": "Adds a Firecrawl MCP server so OpenCode agents can browse and extract web content. Note that bots do have some basic web fetching capabiltiies, this supercharges those abilties!",
+	"description": "Adds a Firecrawl MCP server so agents can browse and extract web content. Note that OpenCode based bots do have some basic web fetching capabiltiies, this supercharges those abilties!",
 	"icon": "web2mcp.svg",
 	"version": "0.0.1",
 	"constants": {
@@ -20,6 +20,62 @@
             "description": "Firecrawl API Key. Sign-up at https://www.firecrawl.dev/."
         }
     ],
+    "hooks": {
+        "POST_INSTALL": [
+            {
+                "type": "createJson",
+                "addOn": "BOT",
+                "level": "GOVERNOR",
+                "path": "/config/bots/%bot.name%/opencode.json",
+                "jsonPath": "mcp",
+                "mode": "merge",
+                "json": {
+                   "web2mcp": {
+                      "type": "remote",
+                      "url": "http://%cfg.projectName%-web2mcp:%env.WEB2MCP_PORT%%env.WEB2MCP_ENDPOINT%",
+                      "enabled": true,
+                      "headers": {
+                        "Authorization": "Bearer %env.FIRECRAWL_API_KEY%"
+                      }
+                    }
+                }
+            },
+            {
+                "type": "createJson",
+                "addOn": "BOT",
+                "level": "BUILDER",
+                "path": "/config/bots/%bot.name%/opencode.json",
+                "jsonPath": "mcp",
+                "mode": "merge",
+                "json": {
+                   "web2mcp": {
+                      "type": "remote",
+                      "url": "http://%cfg.projectName%-web2mcp:%env.WEB2MCP_PORT%%env.WEB2MCP_ENDPOINT%",
+                      "enabled": true,
+                      "headers": {
+                        "Authorization": "Bearer %env.FIRECRAWL_API_KEY%"
+                      }
+                    }
+                }
+            }
+        ],
+        "PRE_UNINSTALL": [
+            {
+                "type": "deleteJson",
+                "addOn": "BOT",
+                "level": "GOVERNOR",
+                "path": "/config/bots/%bot.name%/opencode.json",
+                "jsonPath": "/mcp/web2mcp"
+            },
+            {
+                "type": "deleteJson",
+                "addOn": "BOT",
+                "level": "BUILDER",
+                "path": "/config/bots/%bot.name%/opencode.json",
+                "jsonPath": "/mcp/web2mcp"
+            }
+        ]
+    },
 	"extensions": {
 		"STACK": {
 			"containers": {
@@ -30,21 +86,7 @@
 						"HTTP_STREAMABLE_SERVER": "true",
 						"FIRECRAWL_API_KEY": "%env.FIRECRAWL_API_KEY%",
 						"FIRECRAWL_API_URL": "%env.FIRECRAWL_API_URL%"
-					},
-					"managed": [
-						{
-							"resource": "governor-opencode.json",
-							"dropIns": "/config/drop-ins/opencode/opencode.json.d"
-						},
-						{
-							"resource": "builder-opencode.json",
-							"dropIns": "/config/drop-ins/opencode/opencode.json.d"
-						},
-						{
-							"resource": "actor-opencode.json",
-							"dropIns": "/config/drop-ins/opencode/opencode.json.d"
-						}
-					]
+					}
 				}
 			}
 		}

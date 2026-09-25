@@ -11,6 +11,136 @@
         "BLENDER_TCP_PROTOCOL_PORT" : "9876",
         "BLENDER_PROJECT_DIR" : "%cfg.workspaceDir%/blender"
     },
+    "hooks": {
+        "POST_INSTALL": [
+            {
+                "type": "createJson",
+                "addOn": "BOT",
+                "level": "GOVERNOR",
+                "path": "/config/bots/%bot.name%/opencode.json",
+                "jsonPath": "mcp",
+                "mode": "merge",
+                "json": {
+                    "blender_mcp": {
+                      "type": "remote",
+                      "url": "http://%cfg.projectName%-blender:%env.BLENDER_MCP_PORT%/mcp",
+                      "enabled": true
+                  }
+                }
+            },
+            {
+                "type": "createJson",
+                "addOn": "BOT",
+                "level": "GOVERNOR",
+                "path": "/config/bots/%bot.name%/opencode.json",
+                "jsonPath": "permission",
+                "mode": "merge",
+                "json": {
+                    "write": {
+                      "/workspace/blender": "allow",
+                      "/workspace/blender/**": "allow"
+                    },
+                    "edit": {
+                      "/workspace/blender": "allow",
+                      "/workspace/blender/**": "allow"
+                    },
+                    "bash": {
+                      "python *": "allow"
+                    },
+                    "external_directory": {
+                      "/workspace/blender/**": "allow",
+                      "/workspace/blender/": "allow"
+                    }
+                }
+            },
+            {
+                "type": "createJson",
+                "addOn": "BOT",
+                "level": "BUILDER",
+                "path": "/config/bots/%bot.name%/opencode.json",
+                "jsonPath": "mcp",
+                "mode": "merge",
+                "json": {
+                    "blender_mcp": {
+                      "type": "remote",
+                      "url": "http://%cfg.projectName%-blender:%env.BLENDER_MCP_PORT%/mcp",
+                      "enabled": true
+                    }
+                }
+            },
+            {
+                "type": "createJson",
+                "addOn": "BOT",
+                "level": "BUILDER",
+                "path": "/config/bots/%bot.name%/opencode.json",
+                "jsonPath": "permission",
+                "mode": "merge",
+                "json": {
+                    "write": {
+                      "/workspace/blender": "allow",
+                      "/workspace/blender/**": "allow"
+                    },
+                    "edit": {
+                      "/workspace/blender": "allow",
+                      "/workspace/blender/**": "allow"
+                    },
+                    "bash": {
+                      "python *": "allow"
+                    },
+                    "external_directory": {
+                      "/workspace/blender/**": "allow",
+                      "/workspace/blender/": "allow"
+                    }
+                }
+            }
+        ],
+        "PRE_UNINSTALL": [
+            {
+                "type": "deleteJson",
+                "addOn": "BOT",
+                "level": "GOVERNOR",
+                "path": "/config/bots/%bot.name%/opencode.json",
+                "jsonPath": "/mcp/blender_mcp"
+            },
+            {
+                "type": "deleteJson",
+                "addOn": "BOT",
+                "level": "GOVERNOR",
+                "path": "/config/bots/%bot.name%/opencode.json",
+                "jsonPaths": [
+                    "/permission/write/workspace\\/blender",
+                    "/permission/write/workspace\\/blender\\/**",
+                    "/permission/edit/workspace\\/blender",
+                    "/permission/edit/workspace\\/blender\\/**",
+                    "/permission/bash/python *",
+                    "/permission/external_directory/workspace\\/blender\\/",
+                    "/permission/external_directory/workspace\\/blender\\/**"
+                ]
+            },
+            {
+                "type": "deleteJson",
+                "addOn": "BOT",
+                "level": "BUILDER",
+                "path": "/config/bots/%bot.name%/opencode.json",
+                "jsonPath": "/mcp/blender_mcp"
+            },
+            {
+                "type": "deleteJson",
+                "addOn": "BOT",
+                "level": "BUILDER",
+                "path": "/config/bots/%bot.name%/opencode.json",
+                "jsonPaths": [
+                    "/permission/write/workspace\\/blender",
+                    "/permission/write/workspace\\/blender\\/**",
+                    "/permission/edit/workspace\\/blender",
+                    "/permission/edit/workspace\\/blender\\/**",
+                    "/permission/bash/python *",
+                    "/permission/external_directory/workspace\\/blender\\/",
+                    "/permission/external_directory/workspace\\/blender\\/**"
+                ]
+            }
+        ]
+    },
 	"extensions": {
 		"STACK": {
 			"containers": {
@@ -32,20 +162,6 @@
 					},
 					"directories": [
                         "%env.BLENDER_PROJECT_DIR%"
-                    ], 
-                    "managed": [
-                        {
-                        "resource": "governor-opencode.json",
-                        "dropIns": "/config/drop-ins/opencode/opencode.json.d"
-                        },
-                        {
-                        "resource": "builder-opencode.json",
-                        "dropIns": "/config/drop-ins/opencode/opencode.json.d"
-                        },
-                        {
-                        "resource": "actor-opencode.json",
-                        "dropIns": "/config/drop-ins/opencode/opencode.json.d"
-                        }
                     ]
 				}
 			}

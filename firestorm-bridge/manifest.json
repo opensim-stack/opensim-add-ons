@@ -1,0 +1,89 @@
+{
+	"name": "firestorm-bridge",
+	"description": "This add-on integrates OpenSim AI Stack with Firestorm MCP (https://github.com/AochiToxx/firestorm-mcp). Note, you have to install and run Firestorm MCP yourself according to it's instructions. You must run it in streamable HTTP or SSE mode and set this add-on configuration after it is enableed.",
+	"icon": "firestorm-bridge.svg",
+	"version": "0.0.1",
+	"constants": {
+		"FIRESTORM_MCP_HOST": "your-computer-ip",
+		"FIRESTORM_MCP_ENDPOINT": "/mcp",
+		"FIRESTORM_MCP_PORT": "8000"
+	},
+    "hooks": {
+        "POST_INSTALL": [
+            {
+                "type": "createJson",
+                "addOn": "BOT",
+                "level": "GOVERNOR",
+                "path": "/config/bots/%bot.name%/opencode.json",
+                "jsonPath": "mcp",
+                "mode": "merge",
+                "json": {
+                    "firestorm_mcp": {
+                      "type": "remote",
+                      "url": "http://%env.FIRESTORM_MCP_HOST%:%env.FIRESTORM_MCP_PORT%%env.FIRESTORM_MCP_ENDPOINT%",
+                      "enabled": true,
+                      "headers": {
+                        "Authorization": "Bearer %env.FIRESTORM_MCP_API_KEY%"
+                      }
+                  }
+                }
+            },
+            {
+                "type": "createJson",
+                "addOn": "BOT",
+                "level": "BUILDER",
+                "path": "/config/bots/%bot.name%/opencode.json",
+                "jsonPath": "mcp",
+                "mode": "merge",
+                "json": {
+                    "firestorm_mcp": {
+                      "type": "remote",
+                      "url": "http://%env.FIRESTORM_MCP_HOST%:%env.FIRESTORM_MCP_PORT%%env.FIRESTORM_MCP_ENDPOINT%",
+                      "enabled": true,
+                      "headers": {
+                        "Authorization": "Bearer %env.FIRESTORM_MCP_API_KEY%"
+                      }
+                  } 
+                }
+        }
+        ],
+        "PRE_UNINSTALL": [
+            {
+                "type": "deleteJson",
+                "addOn": "BOT",
+                "level": "GOVERNOR",
+                "path": "/config/bots/%bot.name%/opencode.json",
+                "jsonPath": "/mcp/firestorm_mcp"
+            },
+            {
+                "type": "deleteJson",
+                "addOn": "BOT",
+                "level": "BUILDER",
+                "path": "/config/bots/%bot.name%/opencode.json",
+                "jsonPath": "/mcp/firestorm_mcp"
+            }
+        ]
+    },
+    "configuration": [
+        {
+            "name": "FIRESTORM_MCP_HOST",
+            "type": "TEXT",
+            "description": "The host where the Firestorm MCP server will be running,  i.e. your viewer. This should be your computer's IP address."
+        },
+        {
+            "name": "FIRESTORM_MCP_ENDPOINT",
+            "type": "TEXT",
+            "description": "The endpoint where the Firestorm MCP server will be accessible. Recommended be /mcp for streamable-http modee."
+        },
+        {
+            "name": "FIRESTORM_MCP_PORT",
+            "type": "INTEGER",
+            "description": "The port where the Firestorm MCP server will be running. This should be 8000."
+        },
+        {
+            "name": "FIRESTORM_MCP_API_KEY",
+            "type": "TEXT",
+            "description": "If the MCP requires an authentication token (recommended), provide it here. Otherwise leave blank."
+        }
+    ]
+}

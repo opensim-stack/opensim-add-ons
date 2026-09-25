@@ -12,6 +12,37 @@
     "tokens": [
         "CONSOLE_MCP_HTTP_BEARER_TOKEN"
     ],
+    "hooks": {
+        "POST_INSTALL": [
+            {
+                "type": "createJson",
+                "addOn": "BOT",
+                "level": "GOVERNOR",
+                "path": "/config/bots/%bot.name%/opencode.json",
+                "jsonPath": "mcp",
+                "mode": "merge",
+                "json": {
+                   "console2mcp": {
+                        "type": "remote",
+                        "url": "http://%cfg.projectName%-console2mcp:%env.CONSOLE_MCP_PORT%/mcp",
+                        "enabled": true,
+                        "headers": {
+                            "Authorization": "Bearer %token.CONSOLE_MCP_HTTP_BEARER_TOKEN%"
+                        }
+                    }
+                }
+            }
+        ],
+        "PRE_UNINSTALL": [
+            {
+                "type": "deleteJson",
+                "addOn": "BOT",
+                "level": "GOVERNOR",
+                "path": "/config/bots/%bot.name%/opencode.json",
+                "jsonPath": "/mcp/console2mcp"
+            }
+        ]
+    },
 	"extensions": {
 		"SIMULATOR": {
 			"containers": {
@@ -25,21 +56,7 @@
                         "OPENSIM_CONSOLE_URL": "http://%cfg.projectName%-grid-services:%sim.port%",
                         "OPENSIM_CONSOLE_USER": "%grid.consoleUser%",
                         "OPENSIM_CONSOLE_PASS": "%grid.consolePass%"
-					},
-                    "managed": [
-                        {
-                        "resource": "governor-opencode.json",
-                        "dropIns": "/config/drop-ins/opencode/opencode.json.d"
-                        },
-                        {
-                        "resource": "builder-opencode.json",
-                        "dropIns": "/config/drop-ins/opencode/opencode.json.d"
-                        },
-                        {
-                        "resource": "actor-opencode.json",
-                        "dropIns": "/config/drop-ins/opencode/opencode.json.d"
-                        }
-                    ]
+					}
 				}
 			}
 		}
