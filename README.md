@@ -36,6 +36,20 @@ Our example manifest below for Blender uses OpenSim AI Stack's own Blender build
 ### Environment Variable Resolution
 
  `%env.NAME%` will resolve from the passed in environment first. If that does not exist, it will come from the `const` table in the manifest. If that does not exist, the environment variable will be ignored unless the replacement itself contains other content. E.g `"MYHOST": "%env.MYHOST%-tail"` would resolve as `"MYHOST": "-tail"` if `MYHOST` does not exist as a `const` or passed in variable.
+ 
+### Installation Hooks
+
+`POST_INSTALL` and `PRE_UNINSTALL` hooks may be used to manipulate files, updating `.ini` and `.json` files and executing scripts for anything else that might be needed.
+
+Each step in the "script" has a `type`, which may be one of.
+
+ * `createJson` - Create or update a JSON element
+ * `deleteJson` - Delete one or more JSON elements given their document path.
+ * `createIni` - Similar as `createJson`, for `.ini` files.
+ * `deleteJson` - Again, similar as `deleteJson` but for `.ini` files.
+ * `exec` - Execute a script (supplied as a resource).
+ * `copy` - Copy a resource to a file.
+ * `delete` - Delete a file.
 
 ### The Manifest
 

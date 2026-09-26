@@ -1,6 +1,6 @@
 {
 	"name": "web2mcp",
-	"description": "Adds a Firecrawl MCP server so OpenCode agents can browse and extract web content. Note that bots do have some basic web fetching capabiltiies, this supercharges those abilties!",
+	"description": "Adds a Firecrawl MCP server so agents can browse and extract web content. Note that OpenCode based bots do have some basic web fetching capabiltiies, this supercharges those abilties!",
 	"icon": "web2mcp.svg",
 	"version": "0.0.1",
 	"constants": {

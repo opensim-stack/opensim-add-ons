@@ -7,10 +7,28 @@
 	    "OPENSIM_BLENDER_IMAGE": "%cfg.group%opensim-blender:%grid.updates.tag%",
 	    "BLENDER_MCP_HOST": "0.0.0.0",
         "BLENDER_MCP_PORT": "8996",
+        "BLENDER_HEADLESS_ENABLED": "true",
         "BLENDER_TCP_PROTOCOL_HOST" : "127.0.0.1",
         "BLENDER_TCP_PROTOCOL_PORT" : "9876",
         "BLENDER_PROJECT_DIR" : "%cfg.workspaceDir%/blender"
     },
+    "configuration": [
+        {
+            "name": "BLENDER_HEADLESS_ENABLED",
+            "type": "BOOLEAN",
+            "description": "Whether to enable a headless Blender instance ready. If set to false, you must run your own Blender instance and point the below host and port variables at your computer."
+        },
+        {
+            "name": "BLENDER_TCP_PROTOCOL_HOST",
+            "type": "TEXT",
+            "description": "The hostname or IP address of the Blender instance to connect to."
+        },
+        {
+            "name": "BLENDER_TCP_PROTOCOL_PORT",
+            "type": "INTEGER",
+            "description": "The port number on which the Blender instance is listening."
+        }
+    ],
 	"extensions": {
 		"STACK": {
 			"containers": {
@@ -19,6 +37,7 @@
 					"environment": {
                         "BLENDER_MCP_HOST": "%env.BLENDER_MCP_HOST%",
                         "BLENDER_MCP_PORT": "%env.BLENDER_MCP_PORT%",
+                        "BLENDER_HEADLESS_ENABLED": "%env.BLENDER_HEADLESS_ENABLED%",
                         "BLENDER_TCP_PROTOCOL_HOST": "%env.BLENDER_TCP_PROTOCOL_HOST%",
                         "BLENDER_TCP_PROTOCOL_PORT": "%env.BLENDER_TCP_PROTOCOL_PORT%",
                         "BLENDER_PROJECT_DIR": "%env.BLENDER_PROJECT_DIR%",
