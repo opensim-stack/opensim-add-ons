@@ -36,176 +36,40 @@ Our example manifest below for Blender uses OpenSim AI Stack's own Blender build
 ### Environment Variable Resolution
 
  `%env.NAME%` will resolve from the passed in environment first. If that does not exist, it will come from the `const` table in the manifest. If that does not exist, the environment variable will be ignored unless the replacement itself contains other content. E.g `"MYHOST": "%env.MYHOST%-tail"` would resolve as `"MYHOST": "-tail"` if `MYHOST` does not exist as a `const` or passed in variable.
- 
-### Installation Hooks
-
-`POST_INSTALL` and `PRE_UNINSTALL` hooks may be used to manipulate files, updating `.ini` and `.json` files and executing scripts for anything else that might be needed.
-
-Each step in the "script" has a `type`, which may be one of.
-
- * `createJson` - Create or update a JSON element
- * `deleteJson` - Delete one or more JSON elements given their document path.
- * `createIni` - Similar as `createJson`, for `.ini` files.
- * `deleteJson` - Again, similar as `deleteJson` but for `.ini` files.
- * `exec` - Execute a script (supplied as a resource).
- * `copy` - Copy a resource to a file.
- * `delete` - Delete a file.
 
 ### The Manifest
 
 ```json
 {
+    /* Simple name, all lower case, no punctuation except '-', no spaces */
     "name": "blender",
-    "description": "This add-on provides a Blender instance with MCP tools enabled, allowing your Bots access to a 3D pipeline.",
-    "icon" : "blender.svg",
+    /* Icon */
+    "icon" : "blender.svg",    
+    /* Author - Github user for preference */
+    "author": "github-user",   
+    /* Version - version of the add on */
     "version": "0.0.1",
+    /* Full description */
+    "description": "This add-on provides a Blender instance with MCP tools enabled, allowing your Bots access to a 3D pipeline.",
+    /* Default values for environment variables that aren't provided */
     "constants": {
-        "OPENSIM_BLENDER_IMAGE": "%cfg.group%opensim-blender:%grid.updates.tag%",
+        "OPENSIM_BLENDER_IMAGE": "bithatch/opensim-blender:latest",
         "BLENDER_MCP_HOST": "0.0.0.0",
         "BLENDER_MCP_PORT": "8996",
         "BLENDER_TCP_PROTOCOL_HOST" : "127.0.0.1",
         "BLENDER_TCP_PROTOCOL_PORT" : "9876",
-        "BLENDER_PROJECT_DIR" : "%cfg.workspaceDir%/blender"
+        "BLENDER_PROJECT_DIR" : "/workspace/blender"
     },
-    "hooks": {
-        "POST_INSTALL": [
-            {
-                "type": "createJson",
-                "addOn": "BOT",
-                "level": "GOVERNOR",
-                "path": "/config/bots/%bot.name%/opencode.json",
-                "jsonPath": "mcp",
-                "mode": "merge",
-                "json": {
-                   "mcp": {
-                    "blender_mcp": {
-                      "type": "remote",
-                      "url": "http://%cfg.projectName%-blender:%env.BLENDER_MCP_PORT%/mcp",
-                      "enabled": true
-                    }
-                  }
-                }
-            },
-            {
-                "type": "createJson",
-                "addOn": "BOT",
-                "level": "GOVERNOR",
-                "path": "/config/bots/%bot.name%/opencode.json",
-                "jsonPath": "permission",
-                "mode": "merge",
-                "json": {
-                    "write": {
-                      "/workspace/blender": "allow",
-                      "/workspace/blender/**": "allow"
-                    },
-                    "edit": {
-                      "/workspace/blender": "allow",
-                      "/workspace/blender/**": "allow"
-                    },
-                    "bash": {
-                      "python *": "allow"
-                    },
-                    "external_directory": {
-                      "/workspace/blender/**": "allow",
-                      "/workspace/blender/": "allow"
-                    }
-                }
-            },
-            {
-                "type": "createJson",
-                "addOn": "BOT",
-                "level": "BUILDER",
-                "path": "/config/bots/%bot.name%/opencode.json",
-                "jsonPath": "mcp",
-                "mode": "merge",
-                "json": {
-                   "mcp": {
-                    "blender_mcp": {
-                      "type": "remote",
-                      "url": "http://%cfg.projectName%-blender:%env.BLENDER_MCP_PORT%/mcp",
-                      "enabled": true
-                    }
-                  }
-                }
-            },
-            {
-                "type": "createJson",
-                "addOn": "BOT",
-                "level": "BUILDER",
-                "path": "/config/bots/%bot.name%/opencode.json",
-                "jsonPath": "permission",
-                "mode": "merge",
-                "json": {
-                    "write": {
-                      "/workspace/blender": "allow",
-                      "/workspace/blender/**": "allow"
-                    },
-                    "edit": {
-                      "/workspace/blender": "allow",
-                      "/workspace/blender/**": "allow"
-                    },
-                    "bash": {
-                      "python *": "allow"
-                    },
-                    "external_directory": {
-                      "/workspace/blender/**": "allow",
-                      "/workspace/blender/": "allow"
-                    }
-                }
-            }
-        ],
-        "PRE_UNINSTALL": [
-            {
-                "type": "deleteJson",
-                "addOn": "BOT",
-                "level": "GOVERNOR",
-                "path": "/config/bots/%bot.name%/opencode.json",
-                "jsonPath": "mcp.blender_mcp"
-            },
-            {
-                "type": "deleteJson",
-                "addOn": "BOT",
-                "level": "GOVERNOR",
-                "path": "/config/bots/%bot.name%/opencode.json",
-                "jsonPaths": [
-                    "/permission/write/workspace\\/blender",
-                    "/permission/write/workspace\\/blender\\/**",
-                    "/permission/edit/workspace\\/blender",
-                    "/permission/edit/workspace\\/blender\\/**",
-                    "/permission/bash/python *",
-                    "/permission/external_directory/workspace\\/blender\\/",
-                    "/permission/external_directory/workspace\\/blender\\/**"
-                ]
-            },
-            {
-                "type": "deleteJson",
-                "addOn": "BOT",
-                "level": "BUILDER",
-                "path": "/config/bots/%bot.name%/opencode.json",
-                "jsonPath": "mcp.blender_mcp"
-            },
-            {
-                "type": "deleteJson",
-                "addOn": "BOT",
-                "level": "BUILDER",
-                "path": "/config/bots/%bot.name%/opencode.json",
-                "jsonPaths": [
-                    "/permission/write/workspace\\/blender",
-                    "/permission/write/workspace\\/blender\\/**",
-                    "/permission/edit/workspace\\/blender",
-                    "/permission/edit/workspace\\/blender\\/**",
-                    "/permission/bash/python *",
-                    "/permission/external_directory/workspace\\/blender\\/",
-                    "/permission/external_directory/workspace\\/blender\\/**"
-                ]
-            }
-        ]
-    },
+    /* Extensions in this add-on */
     "extensions": {
         "STACK": {
+            /* Containers in this stack extension */
             "containers": {
+                /* The image reference */
                 "%env.OPENSIM_BLENDER_IMAGE%": {
-                    "name": "%cfg.projectName%-blender",
+                    /* Container name */
+                    "name": "%cfg.COMPOSE_PROJECT_NAME%-blender",
+                    /* Environment */
                     "environment": {
                         "BLENDER_MCP_HOST": "%env.BLENDER_MCP_HOST%",
                         "BLENDER_MCP_PORT": "%env.BLENDER_MCP_PORT%",
@@ -214,18 +78,45 @@ Each step in the "script" has a `type`, which may be one of.
                         "BLENDER_PROJECT_DIR": "%env.BLENDER_PROJECT_DIR%",
                         "BLENDER_EXTRA_ARGS": "%env.BLENDER_EXTRA_ARGS%"
                     },
+                    /* Volumes */
                     "volumes": {
-                        "%cfg.projectName%_opensim-workspace": "/workspace",
-                        "%cfg.projectName%_blender-config": "/root/.config/blender",
-                        "%cfg.projectName%_blender-cache": "/root/.cache/opencode",
-                        "%cfg.projectName%_blender-data": "/root/.local/share/blender"
+                        "%cfg.COMPOSE_PROJECT_NAME%_opensim-workspace": "/workspace",
+                        "%cfg.COMPOSE_PROJECT_NAME%_blender-config": "/root/.config/blender",
+                        "%cfg.COMPOSE_PROJECT_NAME%_blender-cache": "/root/.cache/opencode",
+                        "%cfg.COMPOSE_PROJECT_NAME%_blender-data": "/root/.local/share/blender"
                     },
+                    /* Directories to create */
                     "directories": [
                         "%env.BLENDER_PROJECT_DIR%"
+                    ],
+                    /* Managed files allow an add-on to drop in 
+                      configuration files to other parts of the stack.
+                      
+                      When this add-on is installed and configuration is
+                      generated, any stack element that uses managed files,
+                      and has a matching "resource", and a matching "drop-ins"
+                      directory, OUR resource will be copied to that
+                      directory and its contents will be used to generate
+                      the other elements config files (e.g. by merging)
+                    */
+                    "managed": [
+                        {
+                        "resource": "governor-opencode.json",
+                        "dropIns": "/config/add-ons/opencode/opencode.json.d"
+                        },
+                        {
+                        "resource": "builder-opencode.json",
+                        "dropIns": "/config/add-ons/opencode/opencode.json.d"
+                        },
+                        {
+                        "resource": "actor-opencode.json",
+                        "dropIns": "/config/add-ons/opencode/opencode.json.d"
+                        }
                     ]
                 }
             }
         }
     }
 }
+
 ```

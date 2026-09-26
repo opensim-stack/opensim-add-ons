@@ -13,37 +13,6 @@
         "MARIADB_USER": "opensim",
         "MARIADB_DATABASE": "opensim"
     },
-    "reconfigures": [
-        "opencode-extensions"
-    ],
-    "hooks": {
-        "POST_INSTALL": [
-            {
-                "type": "createJson",
-                "addOn": "BOT",
-                "level": "GOVERNOR",
-                "path": "/config/bots/%bot.name%/opencode.json",
-                "jsonPath": "mcp",
-                "mode": "merge",
-                "json": {
-                    "database2mcp": {
-                      "type": "remote",
-                      "url": "http://%cfg.projectName%-database2mcp:%env.DATABASE_MCP_PORT%%env.DATABASE_MCP_SSE_ROOT_PATH%",
-                      "enabled": true
-                    }
-                }
-            }
-        ],
-        "PRE_UNINSTALL": [
-            {
-                "type": "deleteJson",
-                "addOn": "BOT",
-                "level": "GOVERNOR",
-                "path": "/config/bots/%bot.name%/opencode.json",
-                "jsonPath": "/mcp/database2mcp"
-            }
-        ]
-    },
 	"extensions": {
 		"SIMULATOR": {
 			"containers": {
@@ -57,7 +26,21 @@
                         "JDBC_URL": "jdbc:mariadb://%env.MARIADB_HOST%:3306/%env.MARIADB_DATABASE%",
                         "JDBC_USER": "%env.MARIADB_USER%",
                         "JDBC_PASSWORD": "%token.MARIADB_PASSWORD%"
-					}
+					},
+                    "managed": [
+                        {
+                        "resource": "governor-opencode.json",
+                        "dropIns": "/config/drop-ins/opencode/opencode.json.d"
+                        },
+                        {
+                        "resource": "builder-opencode.json",
+                        "dropIns": "/config/drop-ins/opencode/opencode.json.d"
+                        },
+                        {
+                        "resource": "actor-opencode.json",
+                        "dropIns": "/config/drop-ins/opencode/opencode.json.d"
+                        }
+                    ]
 				}
 			}
 		}
