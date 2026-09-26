@@ -26,7 +26,7 @@
         {
             "name": "BLENDER_TCP_PROTOCOL_PORT",
             "type": "INTEGER",
-            "description": "The port numbeer on which the Blender instance is listening."
+            "description": "The port number on which the Blender instance is listening."
         }
     ],
 	"extensions": {
