@@ -1,0 +1,13 @@
+{
+	"$schema": "https://opencode.ai/config.json",
+	"mcp": {
+		"firestorm_mcp": {
+			"type": "remote",
+			"url": "http://%env.FIRESTORM_MCP_HOST%:%env.FIRESTORM_MCP_PORT%%env.FIRESTORM_MCP_ENDPOINT%",
+			"enabled": true,
+			"headers": {
+				"Authorization": "Bearer %env.FIRESTORM_MCP_API_KEY%"
+			}
+		}
+	}
+}
